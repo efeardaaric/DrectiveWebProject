@@ -4,112 +4,80 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Section from '@/components/Section'
 import CTA from '@/components/CTA'
-import { staggerContainer, staggerItem } from '@/lib/motion'
-import { 
-  Target, 
-  Users, 
-  Lightbulb, 
-  Award,
-  Code,
-  Gamepad2,
-  Palette,
-  Zap
-} from 'lucide-react'
+import { staggerContainer, staggerItem, revealImage, easeSmooth } from '@/lib/motion'
+import { Users, Lightbulb, Award, Code, Gamepad2, Palette, Zap } from 'lucide-react'
+import { team } from '@/lib/team'
 
 const values = [
   {
-    icon: <Target className="w-6 h-6" />,
-    title: 'Kalite Odaklı',
-    description: 'Her projede en yüksek kalite standartlarını hedefliyoruz. Kod kalitesi, performans ve kullanıcı deneyimi önceliğimiz.'
+    icon: <Gamepad2 className="w-5 h-5" />,
+    title: 'Önce oynanış',
+    description: 'Bir fikri kâğıtta değil, oynanabilir bir prototipte test ederiz. Eğlenceli değilse devam etmeyiz.',
   },
   {
-    icon: <Users className="w-6 h-6" />,
-    title: 'Müşteri Memnuniyeti',
-    description: 'Müşterilerimizin ihtiyaçlarını anlayıp, beklentilerini aşan çözümler sunuyoruz. Sürekli iletişim ve şeffaflık ilkemiz.'
+    icon: <Users className="w-5 h-5" />,
+    title: 'Küçük ve yakın ekip',
+    description: 'Tasarımcı, sanatçı ve yazılımcı aynı masada. Kararlar hızlı, iletişim doğrudan.',
   },
   {
-    icon: <Lightbulb className="w-6 h-6" />,
-    title: 'İnovasyon',
-    description: 'En yeni teknolojileri takip ediyor, projelerimizde modern yaklaşımlar kullanıyoruz. Sürekli öğrenme ve gelişim odaklıyız.'
+    icon: <Lightbulb className="w-5 h-5" />,
+    title: 'Kendi fikirlerimiz',
+    description: 'Mahallenin Makası gibi oyunlar, kendi gözlemlerimizden ve kültürümüzden çıkıyor.',
   },
   {
-    icon: <Award className="w-6 h-6" />,
-    title: 'Güvenilirlik',
-    description: 'Zamanında teslimat, kaliteli çözümler ve uzun vadeli destek sunuyoruz. Güvenilir iş ortağı olmak temel değerimiz.'
-  }
+    icon: <Award className="w-5 h-5" />,
+    title: 'Bitirilmiş işler',
+    description: 'Yarım prototipleri değil, mağazada ve canlıda olan ürünleri sayıyoruz.',
+  },
 ]
 
 const timeline = [
   {
     year: '2024',
     title: 'Kuruluş',
-    description: 'D-RECTIVE Interactive olarak yazılım geliştirme yolculuğumuza başladık.'
+    description: 'Drective Interactive olarak ilk oyun prototiplerimizi geliştirmeye başladık.',
   },
   {
     year: '2024',
-    title: 'İlk Projeler',
-    description: 'Web geliştirme alanında ilk başarılı projelerimizi tamamladık.'
+    title: 'İlk uygulamalar',
+    description: 'Scanny ve StuFinance ile mobil uygulama tarafına adım attık.',
   },
   {
     year: '2025',
-    title: 'Oyun Geliştirme',
-    description: 'Unity ile oyun geliştirme hizmetlerimizi ekledik ve ilk oyun projelerimizi hayata geçirdik.'
+    title: 'Zaim Teknopark',
+    description: 'Zaim Teknopark bünyesine kabul edildik; ekibimiz ve projelerimiz için yeni bir dönem başladı.',
   },
   {
     year: '2025',
-    title: 'Büyüme',
-    description: '10+ proje tamamladık ve müşteri portföyümüzü genişlettik.'
-  }
+    title: 'ISU IDEA Club sponsorluğu',
+    description: 'İstinye Üniversitesi IDEA Club’ın sponsoru olduk, tanıtım etkinliğinde oyunlarımızı öğrencilerle buluşturduk.',
+  },
+  {
+    year: '2025',
+    title: 'Web projeleri',
+    description: 'CetLine, Miela, Caras Rent a Car, CetLis ve Cetrose için web siteleri geliştirdik.',
+  },
+  {
+    year: '2026',
+    title: 'Connections ve Mahallenin Makası',
+    description: 'Connections Steam’de yayınlandı, yeni mobil oyunumuz Mahallenin Makası’nı tanıttık.',
+  },
 ]
 
-const team = [
+const news = [
   {
-    name: 'Efe Arda Arıç',
-    role: 'Kurucu & Proje Yöneticisi',
-    image: '/images/Arda.jpg',
-    skills: ['Swift', 'Python', 'TypeScript', 'Unity']
+    image: '/images/news/zaim-teknopark.jpg',
+    alt: 'Drective ekibi Zaim Teknopark’ta',
+    date: 'Ağustos 2025',
+    title: 'Zaim Teknopark’a kabul edildik',
+    text: 'Girişimcilik yolculuğumuzda önemli bir adım. Bu süreçteki değerli destekleri için Sayın Özgür Özdemir’e teşekkür ederiz. Projelerimizi ileriye taşımak ve yeni iş birlikleri kurmak için hız kesmeden çalışıyoruz.',
   },
   {
-    name: 'Yusuf Güneş',
-    role: 'Kurucu & Oyun Tasarımcısı',
-    image: '/images/Yusuf.jpg',
-    skills: ['Unity', 'C#', 'C++']
-  },
-  {
-    name: 'Haris Bedirhan Büyükbayrak',
-    role: 'Kurucu & Sanat Direktörü',
-    image: '/images/Haris.jpg',
-    skills: ['Unity', 'C#', '3D Modeling', 'Game Design']
-  },
-  {
-    name: 'Muhammed Yasir Polat',
-    role: 'Oyun Geliştirici',
-    image: '/images/Yasir.jpg',
-    skills: ['Unity', 'C#', 'C++', 'SQL']
-  },
-  {
-    name: 'Mehmet Efe Gürmarmara',
-    role: 'Yazılım Geliştirici',
-    image: '/images/Marmara.jpg',
-    skills: ['Python', 'Figma', 'R']
-  },
-  {
-    name: 'Berkan Cenan Demirer',
-    role: 'Yazılımcı',
-    image: '/images/cenan.png',
-    skills: ['Unity', 'C++', 'UE5']
-  },
-  {
-    name: 'Göksu Çakmak',
-    role: '2D Artist',
-    image: '/images/göksu.jpeg',
-    skills: ['Adobe Photoshop', 'Clip Studio Paint', 'Aseprite']
-  },
-  {
-    name: 'Sevgi Zeynep Duran',
-    role: 'Piksel Sanatçı',
-    image: '/images/sevgi.jpeg',
-    skills: ['Blender', 'Aseprite', 'Spine 2D']
+    image: '/images/news/idea-club-stand.jpg',
+    alt: 'ISU IDEA Club tanıtım etkinliğinde Drective standı',
+    date: 'Ekim 2025',
+    title: 'ISU IDEA Club’ın sponsoruyuz',
+    text: 'Sponsoru olduğumuz IDEA Club’ın tanıtım etkinliğinde genç girişimcilerle bir araya geldik, Ferman ve diğer oyunlarımızı standımızda oynattık. Yeni dönemde başkan Efe Gürmarmara ve ekibine başarılar.',
   },
 ]
 
@@ -118,141 +86,226 @@ const technologies = [
   { name: 'React', icon: <Code className="w-5 h-5" />, category: 'Frontend' },
   { name: 'TypeScript', icon: <Code className="w-5 h-5" />, category: 'Language' },
   { name: 'Unity', icon: <Gamepad2 className="w-5 h-5" />, category: 'Game' },
-  { name: 'Framer Motion', icon: <Palette className="w-5 h-5" />, category: 'Animation' },
-  { name: 'Tailwind CSS', icon: <Palette className="w-5 h-5" />, category: 'Styling' },
+  { name: 'Framer Motion', icon: <Palette className="w-5 h-5" />, category: 'Motion' },
+  { name: 'Tailwind', icon: <Palette className="w-5 h-5" />, category: 'UI' },
   { name: 'Node.js', icon: <Zap className="w-5 h-5" />, category: 'Backend' },
-  { name: 'PostgreSQL', icon: <Zap className="w-5 h-5" />, category: 'Database' }
+  { name: 'PostgreSQL', icon: <Zap className="w-5 h-5" />, category: 'Data' },
 ]
 
 export default function AboutPage() {
   return (
-    <div className="relative">
-      {/* Hero Section */}
+    <div>
       <Section className="pt-8 lg:pt-16">
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
-          className="text-center max-w-4xl mx-auto"
+          viewport={{ once: true }}
+          className="mx-auto max-w-3xl text-center"
         >
-          <motion.div
-            variants={staggerItem}
-            className="flex flex-col items-center mb-8"
-          >
-            <div className="w-30 h-30 relative mb-6">
-              <Image
-                src="/logo.png"
-                alt="D-RECTIVE Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <h1 className="font-heading font-bold text-4xl lg:text-5xl xl:text-6xl text-foreground">
-              Hakkımızda
-            </h1>
+          <motion.div variants={staggerItem} className="mx-auto mb-6 relative h-20 w-20">
+            <Image src="/Logo.png" alt="Drective" fill className="object-contain" />
           </motion.div>
-          <motion.p
+          <motion.p variants={staggerItem} className="eyebrow mb-4">
+            Hakkımızda
+          </motion.p>
+          <motion.h1
             variants={staggerItem}
-            className="text-foreground/70 text-lg lg:text-xl leading-relaxed mb-8"
+            className="font-heading text-4xl font-bold lg:text-6xl"
           >
-            D-RECTIVE Interactive olarak, modern teknolojilerle güçlü çözümler 
-            üretmeyi hedefliyoruz. Web geliştirmeden oyun geliştirmeye kadar 
-            geniş bir yelpazede hizmet veriyoruz.
+            Drective
+          </motion.h1>
+          <motion.p variants={staggerItem} className="mt-6 text-lg text-muted">
+            İstanbul’da kurulan küçük bir oyun ve uygulama stüdyosuyuz. Kendi oyunlarımızı
+            ve mobil uygulamalarımızı geliştiriyor, markalar için web siteleri yapıyoruz.
           </motion.p>
         </motion.div>
       </Section>
 
-      {/* Mission Section */}
-      <Section className="bg-accent-900/20">
+      <Section>
         <motion.div
-          variants={staggerContainer}
+          variants={revealImage}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          viewport={{ once: true }}
+          className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-line"
         >
-          <motion.div variants={staggerItem}>
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Misyonumuz
-            </h2>
-            <p className="text-foreground/70 text-lg leading-relaxed mb-6">
-            Drective Interactive, yazılım ve oyun geliştirme alanında yenilikçi çözümler üreten genç bir ekiptir. Mobil uygulamalardan PC oyunlarına kadar farklı dijital projeler geliştirerek kullanıcı deneyimini ön planda tutar. Hedefimiz, teknolojiyi eğlenceli ve işlevsel hale getirerek global ölçekte güvenilir bir stüdyo olmaktır.
-            </p>
-            <p className="text-foreground/70 text-lg leading-relaxed">
-              Sürekli öğrenme ve gelişim odaklı yaklaşımımızla, en yeni 
-              teknolojileri projelerimizde kullanarak müşterilerimize rekabet 
-              avantajı sağlıyoruz.
-            </p>
-          </motion.div>
-          
-          <motion.div variants={staggerItem} className="relative">
-            <div className="glass p-8 rounded-xl">
-              <div className="grid grid-cols-2 gap-6">
-                {[
-                  { number: '10+', label: 'Proje' },
-                  { number: '2+', label: 'Yıl Deneyim' },
-                  { number: '100%', label: 'Müşteri Memnuniyeti' },
-                  { number: '24/7', label: 'Destek' }
-                ].map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="font-heading font-bold text-2xl lg:text-3xl gradient-text mb-2">
-                      {stat.number}
-                    </div>
-                    <div className="text-foreground/60 text-sm">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          <Image
+            src="/images/team.jpg"
+            alt="Drective ekibi"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
         </motion.div>
       </Section>
 
-      {/* Values Section */}
+      <Section>
+        <div className="grid items-start gap-12 lg:grid-cols-[1fr_0.9fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.75, ease: easeSmooth }}
+          >
+            <p className="eyebrow mb-3">Hikâyemiz</p>
+            <h2 className="font-heading text-3xl font-bold lg:text-4xl">
+              Hayallerin sınırı yok, yeter ki cesaretle peşinden gidelim.
+            </h2>
+            <p className="mt-5 text-muted">
+              Drective Interactive, oyun yapmayı seven birkaç arkadaşın kurduğu bir stüdyo olarak
+              başladı. Bugün tasarımcılar, sanatçılar ve yazılımcılardan oluşan bir ekip olarak
+              kendi oyunlarımızı ve mobil uygulamalarımızı geliştiriyoruz.
+            </p>
+            <p className="mt-4 text-muted">
+              2025’te Zaim Teknopark bünyesine kabul edildik. Aynı yıl ISU IDEA Club’ın sponsoru
+              olduk ve genç girişimcilerle fikir alışverişinde bulunmanın ne kadar ilham verici
+              olduğunu gördük. Aramıza katılan yeni arkadaşlarımızla büyümeye devam ediyoruz.
+            </p>
+            <p className="mt-4 text-muted">
+              Connections ile Steam’e çıktık, Mahallenin Makası ile mahalle kültürünü mobile
+              taşıdık. Geleceği oyunlarımız ve ürettiğimiz teknolojilerle şekillendirmek istiyoruz.
+            </p>
+
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                { number: '2', label: 'Yayındaki oyun' },
+                { number: '2', label: 'Mobil uygulama' },
+                { number: '5', label: 'Canlı web projesi' },
+                { number: String(team.length), label: 'Kişilik ekip' },
+              ].map((stat) => (
+                <div key={stat.label} className="border-l border-line pl-4">
+                  <div className="font-heading text-2xl font-bold text-brass">{stat.number}</div>
+                  <div className="mt-1 text-xs text-muted">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: easeSmooth, delay: 0.1 }}
+            className="grid grid-cols-5 gap-3"
+          >
+            <div className="relative col-span-5 aspect-[4/3] overflow-hidden rounded-2xl border border-line">
+              <Image
+                src="/images/news/idea-club-stand.jpg"
+                alt="Drective ekibi IDEA Club standında"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+              />
+            </div>
+            <div className="relative col-span-3 aspect-[4/3] overflow-hidden rounded-2xl border border-line">
+              <Image
+                src="/images/news/idea-club-ekip.jpg"
+                alt="Drective ekibinden üç kişi oyun standında"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 60vw, 27vw"
+              />
+            </div>
+            <div className="relative col-span-2 overflow-hidden rounded-2xl border border-line">
+              <Image
+                src="/images/news/zaim-teknopark.jpg"
+                alt="Drective ekibi Zaim Teknopark’ta"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 40vw, 18vw"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </Section>
+
       <Section>
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true }}
         >
-          <motion.div variants={staggerItem} className="text-center mb-16">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Değerlerimiz
-            </h2>
-            <p className="text-foreground/70 text-lg max-w-3xl mx-auto">
-              Çalışma prensiplerimizi ve değerlerimizi oluşturan temel ilkeler
-            </p>
+          <motion.div variants={staggerItem} className="mb-10 max-w-2xl">
+            <p className="eyebrow mb-3">Haberler</p>
+            <h2 className="font-heading text-3xl font-bold lg:text-4xl">Son gelişmeler</h2>
           </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
+          <div className="grid gap-6 md:grid-cols-2">
+            {news.map((item) => (
+              <motion.article
+                key={item.title}
                 variants={staggerItem}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                className="glass p-5 rounded-xl hover:glass-strong transition-all duration-300 flex flex-col h-full"
+                className="group overflow-hidden rounded-2xl border border-line bg-surface"
               >
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-lg flex items-center justify-center">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #cc972b 70%, #b88a2a 100%)' }}>
-                      <span style={{ color: '#fff', filter: 'drop-shadow(0 2px 8px #cc972b)' }}>
-                        {value.icon}
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-semibold text-lg text-foreground mb-1.5">
-                      {value.title}
-                    </h3>
-                    <p className="text-foreground/70 text-sm leading-tight">
-                      {value.description}
-                    </p>
-                  </div>
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="m-0 text-xs uppercase tracking-[0.18em] text-brass">{item.date}</p>
+                  <h3 className="mt-2 font-heading text-xl font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </motion.div>
+      </Section>
+
+      <Section>
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={staggerItem} className="mb-10 max-w-2xl">
+            <p className="eyebrow mb-3">Değerler</p>
+            <h2 className="font-heading text-3xl font-bold lg:text-4xl">Nasıl çalışıyoruz</h2>
+          </motion.div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {values.map((value) => (
+              <motion.div key={value.title} variants={staggerItem} className="surface-panel p-6">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-brass/30 bg-brass/10 text-brass">
+                  {value.icon}
+                </div>
+                <h3 className="m-0 font-heading text-lg font-semibold">{value.title}</h3>
+                <p className="mt-2 text-sm text-muted">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </Section>
+
+      <Section>
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={staggerItem} className="mb-10">
+            <p className="eyebrow mb-3">Yolculuk</p>
+            <h2 className="font-heading text-3xl font-bold lg:text-4xl">Kısa tarihçe</h2>
+          </motion.div>
+          <div className="space-y-4">
+            {timeline.map((item) => (
+              <motion.div
+                key={item.title + item.year}
+                variants={staggerItem}
+                className="grid gap-4 rounded-2xl border border-line bg-surface p-5 sm:grid-cols-[100px_1fr]"
+              >
+                <div className="font-heading text-xl font-bold text-brass">{item.year}</div>
+                <div>
+                  <h3 className="m-0 font-heading text-lg font-semibold">{item.title}</h3>
+                  <p className="mt-1 text-sm text-muted">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -260,108 +313,36 @@ export default function AboutPage() {
         </motion.div>
       </Section>
 
-      {/* Timeline Section */}
-      <Section className="bg-accent-900/20">
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          <motion.div variants={staggerItem} className="text-center mb-16">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Yolculuğumuz
-            </h2>
-            <p className="text-foreground/70 text-lg max-w-3xl mx-auto">
-              D-RECTIVE Interactive&apos;in kuruluşundan bugüne kadar olan süreç
-            </p>
-          </motion.div>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5" style={{ background: '#cc972b' }} />
-              
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={staggerItem}
-                  initial="initial"
-                  whileInView="animate"
-                  viewport={{ once: true }}
-                  className="relative flex items-start space-x-8 mb-12 last:mb-0"
-                >
-                  {/* Timeline dot */}
-                  <div className="flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center relative z-10" style={{ background: '#cc972b' }}>
-                    <span className="text-white font-bold text-sm">
-                      {item.year}
-                    </span>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="flex-1 glass p-6 rounded-xl">
-                    <h3 className="font-heading font-semibold text-xl text-foreground mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-foreground/70 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </Section>
-
-      {/* Team Section */}
       <Section>
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true }}
         >
-          <motion.div variants={staggerItem} className="text-center mb-16">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Takımımız
-            </h2>
-            <p className="text-foreground/70 text-lg max-w-3xl mx-auto">
-              Projelerinizi hayata geçiren deneyimli ve yetenekli ekibimiz
-            </p>
+          <motion.div variants={staggerItem} className="mb-10 max-w-2xl">
+            <p className="eyebrow mb-3">Ekip</p>
+            <h2 className="font-heading text-3xl font-bold lg:text-4xl">Takımımız</h2>
+            <p className="mt-3 text-muted">Projeleri birlikte hayata geçiren çekirdek ekip.</p>
           </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {team.map((member) => (
               <motion.div
-                key={index}
+                key={member.name}
                 variants={staggerItem}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                className="glass p-6 rounded-xl hover:glass-strong transition-all duration-300 text-center"
+                whileHover={{ y: -4, transition: { duration: 0.3, ease: easeSmooth } }}
+                className="surface-panel p-5 text-center"
               >
-                <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="relative mx-auto mb-4 h-20 w-20 overflow-hidden rounded-full border border-line">
+                  <Image src={member.image} alt={member.name} fill className="object-cover" />
                 </div>
-                <h3 className="font-heading font-semibold text-lg text-foreground mb-2">
-                  {member.name}
-                </h3>
-                <p className="text-primary-400 text-sm mb-4">
-                  {member.role}
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {member.skills.map((skill, skillIndex) => (
+                <h3 className="m-0 font-heading text-base font-semibold">{member.name}</h3>
+                <p className="mt-1 text-sm text-brass">{member.role}</p>
+                <div className="mt-3 flex flex-wrap justify-center gap-2">
+                  {member.skills.map((skill) => (
                     <span
-                      key={skillIndex}
-                      className="px-3 py-1 text-xs rounded-full"
-                      style={{ background: 'rgba(204,151,43,0.20)', color: '#cc972b', fontWeight: 500 }}
+                      key={skill}
+                      className="rounded-full border border-line px-2.5 py-1 text-[11px] text-muted"
                     >
                       {skill}
                     </span>
@@ -373,65 +354,41 @@ export default function AboutPage() {
         </motion.div>
       </Section>
 
-      {/* Technologies Section */}
-      <Section className="bg-accent-900/20">
+      <Section>
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true }}
         >
-          <motion.div variants={staggerItem} className="text-center mb-16">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Kullandığımız Teknolojiler
-            </h2>
-            <p className="text-foreground/70 text-lg max-w-3xl mx-auto">
-              Projelerimizde kullandığımız modern ve güçlü teknolojiler
-            </p>
+          <motion.div variants={staggerItem} className="mb-10">
+            <p className="eyebrow mb-3">Stack</p>
+            <h2 className="font-heading text-3xl font-bold lg:text-4xl">Teknolojiler</h2>
           </motion.div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
-            {technologies.map((tech, index) => (
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-8">
+            {technologies.map((tech) => (
               <motion.div
-                key={index}
+                key={tech.name}
                 variants={staggerItem}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.03, boxShadow: '0 0 12px #cc972b33', borderColor: '#cc972b' }}
-                className="relative p-5 rounded-xl border border-yellow-300/20 bg-accent-900/60 backdrop-blur-xl shadow-md text-center group transition-all duration-300 overflow-hidden"
+                whileHover={{ y: -3, transition: { duration: 0.25, ease: easeSmooth } }}
+                className="surface-panel px-3 py-4 text-center"
               >
-                <div className="absolute inset-0 pointer-events-none rounded-xl" style={{background: 'linear-gradient(135deg, #cc972b22 0%, #000 100%)', zIndex: 0}} />
-                <div className="relative z-10 w-12 h-12 mx-auto mb-3 flex items-center justify-center rounded-lg bg-yellow-900/10 shadow group-hover:bg-yellow-900/30 transition-all duration-300">
-                  <div className="text-yellow-300 group-hover:text-yellow-400 transition-colors duration-300 text-2xl">
-                    {tech.icon}
-                  </div>
+                <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center text-brass">
+                  {tech.icon}
                 </div>
-                <h3 className="font-bold text-base text-yellow-300 drop-shadow mb-1 group-hover:text-yellow-400 transition-colors duration-300">
-                  {tech.name}
-                </h3>
-                <p className="text-xs text-foreground/60 group-hover:text-yellow-300 transition-colors duration-300">
-                  {tech.category}
-                </p>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-yellow-400/10 blur opacity-30" />
+                <div className="text-sm font-medium text-foreground">{tech.name}</div>
+                <div className="text-[11px] text-muted">{tech.category}</div>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </Section>
 
-      {/* CTA Section */}
       <CTA
-        title="Bizimle Çalışmaya Hazır mısınız?"
-        description="Takımımızla tanışın ve projelerinizi birlikte hayata geçirelim. Modern teknolojilerle güçlü çözümler üretmek için bizimle iletişime geçin."
-        primaryButton={{
-          text: 'İletişime Geç',
-          href: '/contact',
-        }}
-        secondaryButton={{
-          text: 'Projelerimizi İncele',
-          href: '/projects',
-        }}
+        title="Birlikte üretelim"
+        description="Oyun, uygulama ya da web sitesi fikriniz için ekibimizle konuşun."
+        primaryButton={{ text: 'Bizimle Çalışın', href: '/contact#bizimle-calisin' }}
+        secondaryButton={{ text: 'Portföy', href: '/projects' }}
       />
     </div>
   )

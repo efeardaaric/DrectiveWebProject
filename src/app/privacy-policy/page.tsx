@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Gizlilik Politikası | D-RECTIVE',
-  description: 'D-RECTIVE Gizlilik Politikası ve Kişisel Verilerin Korunması hakkında detaylı bilgi.',
+  title: 'Gizlilik Politikası | Drective',
+  description: 'Drective gizlilik politikası ve kişisel verilerin korunması.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-white mb-4 font-heading">1. Giriş</h2>
             <p className="mb-6 text-gray-300 leading-relaxed">
-              D-RECTIVE olarak, ziyaretçilerimizin ve kullanıcılarımızın kişisel verilerinin güvenliğine büyük önem vermekteyiz. 
+              Drective olarak, ziyaretçilerimizin ve kullanıcılarımızın kişisel verilerinin güvenliğine büyük önem vermekteyiz. 
               6698 sayılı Kişisel Verilerin Korunması Kanunu (&quot;KVKK&quot;) kapsamında, kişisel verilerinizin işlenmesi, saklanması ve paylaşılmasına 
               ilişkin usul ve esaslar aşağıda detaylı bir şekilde açıklanmıştır.
             </p>

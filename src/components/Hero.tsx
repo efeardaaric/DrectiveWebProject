@@ -3,145 +3,128 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Play } from 'lucide-react'
-import { heroTitle, heroSubtitle, heroDescription, heroButtons, buttonHover } from '@/lib/motion'
+import { ArrowRight } from 'lucide-react'
+import { easeSmooth } from '@/lib/motion'
+import { mahalleninMakasi } from '@/lib/portfolio'
+
+function Phone({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
+  return (
+    <div
+      className={`relative aspect-[473/1024] overflow-hidden rounded-[2rem] border-[6px] border-[#1c1915] bg-[#1c1915] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] ${className}`}
+    >
+      <Image src={src} alt={alt} fill className="object-cover" sizes="(max-width: 1024px) 40vw, 260px" priority />
+    </div>
+  )
+}
 
 export default function Hero() {
+  const [menu, customer] = mahalleninMakasi.screens
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent-900/20" />
-      
-      {/* Content */}
-      <div className="container-custom section-padding relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Main Title */}
+    <section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute -right-40 top-10 h-[520px] w-[520px] rounded-full bg-brass/10 blur-3xl" />
+
+      <div className="container-custom section-padding relative grid min-h-[calc(100svh-5rem)] items-center gap-14 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: easeSmooth }}
+            className="eyebrow mb-6"
+          >
+            İstanbul · Bağımsız stüdyo
+          </motion.div>
+
           <motion.h1
-            variants={heroTitle}
-            initial="initial"
-            animate="animate"
-            className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-foreground mb-6 leading-tight"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.08, ease: easeSmooth }}
+            className="font-heading text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl"
           >
-            <span>Yazılımda <span className="gradient-text">Güç</span>, Oyunda <span className="gradient-text">Yaratıcılık</span></span>
+            Oyun ve uygulama
+            <br />
+            <span className="text-brass">stüdyosu.</span>
           </motion.h1>
-          
-          {/* Logo and Subtitle */}
-          <motion.div
-            variants={heroSubtitle}
-            initial="initial"
-            animate="animate"
-            className="flex flex-col items-center mb-6"
-          >
-            <div className="w-60 h-60 relative mb-6">
-              <Image
-                src="/logo.png"
-                alt="D-RECTIVE Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-            <p className="font-heading font-semibold text-2xl lg:text-3xl text-primary-400">
-              D-RECTIVE Interactive
-            </p>
-          </motion.div>
-          
-          {/* Description */}
+
           <motion.p
-            variants={heroDescription}
-            initial="initial"
-            animate="animate"
-            className="text-foreground/70 text-lg lg:text-xl max-w-3xl mx-auto mb-8 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.18, ease: easeSmooth }}
+            className="mt-6 max-w-xl text-lg text-muted"
           >
-           Drective Interactive, yazılım ve oyun geliştirme alanında yenilikçi çözümler üreten genç bir ekiptir. Mobil uygulamalardan dijital oyunlarına kadar farklı dijital projeler geliştirerek kullanıcı deneyimini ön planda tutar. Hedefimiz, teknolojiyi eğlenceli ve işlevsel hale getirerek global ölçekte güvenilir bir stüdyo olmaktır.
+            İstanbul’dan oyunlar ve mobil uygulamalar üretiyoruz. Son oyunumuz{' '}
+            <span className="text-foreground">Mahallenin Makası</span>, Steam’de ise{' '}
+            <span className="text-foreground">Connections</span> yayında. Markalar için
+            web siteleri de yapıyoruz.
           </motion.p>
-          
-          {/* CTA Buttons */}
+
           <motion.div
-            variants={heroButtons}
-            initial="initial"
-            animate="animate"
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.28, ease: easeSmooth }}
+            className="mt-9 flex flex-col gap-3 sm:flex-row"
           >
-            <motion.div
-              variants={buttonHover}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <Link
-                href="/contact"
-                className="btn-primary text-lg px-8 py-4 inline-flex items-center space-x-2 group"
-              >
-                <span>Bizimle Çalışın</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-            </motion.div>
-            
-            <motion.div
-              variants={buttonHover}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <Link
-                href="/projects"
-                className="btn-secondary text-lg px-8 py-4 inline-flex items-center space-x-2 group"
-              >
-                <Play className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-                <span>Projeleri İncele</span>
-              </Link>
-            </motion.div>
+            <Link href="/#mahallenin-makasi" className="btn-primary">
+              Yeni oyunumuzu gör
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="/contact#bizimle-calisin" className="btn-secondary">
+              Bizimle çalışın
+            </Link>
           </motion.div>
-          
-          {/* Stats */}
-          <motion.div
-            variants={heroButtons}
-            initial="initial"
-            animate="animate"
-            className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto"
+
+          <motion.dl
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-line pt-6"
           >
             {[
-              { number: '2+', label: 'Yıllık Deneyim' },
-              { number: '5+', label: 'Tamamlanan Proje' },
-              { number: '100%', label: 'Müşteri Memnuniyeti' },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + index * 0.1 }}
-                className="text-center"
-              >
-                <div className="font-heading font-bold text-2xl lg:text-3xl gradient-text mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-foreground/60 text-sm lg:text-base">
-                  {stat.label}
-                </div>
-              </motion.div>
+              { k: '2', v: 'Yayındaki oyun' },
+              { k: '2', v: 'Mobil uygulama' },
+              { k: '5', v: 'Canlı web projesi' },
+            ].map((s) => (
+              <div key={s.v}>
+                <dt className="font-heading text-3xl font-bold text-foreground">{s.k}</dt>
+                <dd className="mt-1 text-sm text-muted">{s.v}</dd>
+              </div>
             ))}
+          </motion.dl>
+        </div>
+
+        <div className="relative mx-auto h-[460px] w-full max-w-[460px] sm:h-[540px]">
+          <motion.div
+            initial={{ opacity: 0, y: 40, rotate: -4 }}
+            animate={{ opacity: 1, y: 0, rotate: -6 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: easeSmooth }}
+            className="absolute left-[4%] top-[6%] w-[48%]"
+          >
+            <Phone src={customer.src} alt={customer.alt} />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 60, rotate: 2 }}
+            animate={{ opacity: 1, y: 0, rotate: 5 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: easeSmooth }}
+            className="absolute right-[4%] top-0 w-[50%]"
+          >
+            <Phone src={menu.src} alt={menu.alt} />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.55, ease: easeSmooth }}
+            className="absolute bottom-[2%] left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-2xl border border-line bg-surface/95 p-2.5 pr-5 shadow-xl backdrop-blur"
+          >
+            <div className="relative h-14 w-14 overflow-hidden rounded-xl">
+              <Image src={mahalleninMakasi.icon} alt="Mahallenin Makası uygulama ikonu" fill className="object-cover" sizes="56px" />
+            </div>
+            <div>
+              <p className="m-0 text-xs text-muted">Yeni oyun</p>
+              <p className="m-0 font-heading text-base font-bold text-foreground">Mahallenin Makası</p>
+            </div>
           </motion.div>
         </div>
       </div>
-      
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-foreground/30 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-foreground/50 rounded-full mt-2"
-          />
-        </motion.div>
-      </motion.div>
     </section>
   )
 }

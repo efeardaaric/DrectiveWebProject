@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
-import Image from 'next/image';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { easeSmooth } from "@/lib/motion";
 
 type Props = {
   title: string;
@@ -14,45 +16,51 @@ type Props = {
   className?: string;
 };
 
-export default function ProjectCard({ title, description, image, tags, liveUrl, githubUrl, images, video, className = '' }: Props) {
+export default function ProjectCard({
+  title,
+  description,
+  image,
+  tags,
+  images,
+  video,
+  className = "",
+}: Props) {
   const [current, setCurrent] = React.useState(0);
   const hasImages = images && images.length > 0;
-  const isSpecialProject = ['ferman', 'crusader tycoon', 'scanny'].includes(title.toLowerCase());
-  
+  const isTall = ["ferman", "crusader tycoon", "scanny"].includes(
+    title.toLowerCase()
+  );
+
   return (
-    <div className={`border rounded-2xl p-6 shadow-md hover:shadow-lg transition bg-[#18181b] h-full flex flex-col ${className}`}>
+    <motion.div
+      whileHover={{ y: -4, transition: { duration: 0.35, ease: easeSmooth } }}
+      className={`flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface ${className}`}
+    >
       {video ? (
-        <div 
-          className={`relative w-full mb-4 overflow-hidden rounded-xl ${
-            isSpecialProject ? 'h-[37rem]' : ''
-          }`}
-          style={!isSpecialProject ? { aspectRatio: '16/9' } : {}}
+        <div
+          className={`relative w-full overflow-hidden ${isTall ? "h-[28rem]" : ""}`}
+          style={!isTall ? { aspectRatio: "16/9" } : undefined}
         >
           <video
             src={video}
             controls
-            className={`w-full h-full ${
-              title.toLowerCase() === 'ferman' ? 'object-cover object-top' : 'object-cover'
-            } rounded-xl`}
-            style={{ background: '#000' }}
+            className="h-full w-full object-cover"
+            style={{ background: "#000" }}
           />
         </div>
       ) : hasImages ? (
-        <div 
-          className={`relative w-full mb-4 overflow-hidden rounded-xl ${
-            isSpecialProject ? 'h-[37rem]' : ''
-          }`}
-          style={!isSpecialProject ? { aspectRatio: '16/9' } : {}}
+        <div
+          className={`relative w-full overflow-hidden ${isTall ? "h-[28rem]" : ""}`}
+          style={!isTall ? { aspectRatio: "16/9" } : undefined}
         >
           <Image
             src={images![current]}
             alt={title}
             fill
-            className={`w-full h-full ${
-              title.toLowerCase() === 'stufinance' ? 'object-contain' : 'object-cover'
+            className={`transition duration-700 ease-out ${
+              title.toLowerCase() === "stufinance" ? "object-contain" : "object-cover"
             }`}
-            sizes="(max-width: 768px) 100vw, (max-width: 1000px) 50vw, 33vw"
-            priority
+            sizes="(max-width: 768px) 100vw, 33vw"
           />
           {images!.length > 1 && (
             <div className="absolute inset-0 flex items-center justify-between px-2">
@@ -61,43 +69,39 @@ export default function ProjectCard({ title, description, image, tags, liveUrl, 
                   e.stopPropagation();
                   setCurrent((current - 1 + images!.length) % images!.length);
                 }}
-                className="bg-black/40 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/60 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white"
               >
-                &#8592;
+                ←
               </button>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setCurrent((current + 1) % images!.length);
                 }}
-                className="bg-black/40 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/60 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white"
               >
-                &#8594;
+                →
               </button>
             </div>
           )}
         </div>
       ) : image ? (
-        <div className="relative w-full mb-4 overflow-hidden rounded-xl" style={{ aspectRatio: '16/9' }}>
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="w-full h-full object-cover"
-            priority
-          />
+        <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16/9" }}>
+          <Image src={image} alt={title} fill className="object-cover object-top" />
         </div>
       ) : null}
-      <div className="flex-grow">
-        <h3 className="text-2xl font-semibold mb-1 text-[#cc972b]">{title}</h3>
-        <p className="text-gray-400 mb-4">{description}</p>
+
+      <div className="flex flex-grow flex-col p-5">
+        <h3 className="m-0 font-heading text-xl font-semibold text-foreground">
+          {title}
+        </h3>
+        <p className="mt-2 text-sm text-muted">{description}</p>
         {tags && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {tags.map((tag, i) => (
-              <span 
-                key={i} 
-                className="px-3 py-1 text-xs rounded-full" 
-                style={{ background: 'rgba(204,151,43,0.20)', color: '#cc972b', fontWeight: 500 }}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-line px-3 py-1 text-[11px] text-brass"
               >
                 {tag}
               </span>
@@ -105,6 +109,6 @@ export default function ProjectCard({ title, description, image, tags, liveUrl, 
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,63 +1,40 @@
 import { Variants } from 'framer-motion'
 
-// Common animation variants for consistent motion across the app
+export const easeSmooth = [0.22, 1, 0.36, 1] as const
+
 export const fadeInUp: Variants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
+  initial: { opacity: 0, y: 28 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    transition: { duration: 0.75, ease: easeSmooth },
   },
 }
 
 export const fadeInLeft: Variants = {
-  initial: {
-    opacity: 0,
-    x: -20,
-  },
+  initial: { opacity: 0, x: -24 },
   animate: {
     opacity: 1,
     x: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    transition: { duration: 0.75, ease: easeSmooth },
   },
 }
 
 export const fadeInRight: Variants = {
-  initial: {
-    opacity: 0,
-    x: 20,
-  },
+  initial: { opacity: 0, x: 24 },
   animate: {
     opacity: 1,
     x: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    transition: { duration: 0.75, ease: easeSmooth },
   },
 }
 
 export const scaleIn: Variants = {
-  initial: {
-    opacity: 0,
-    scale: 0.9,
-  },
+  initial: { opacity: 0, scale: 0.96 },
   animate: {
     opacity: 1,
     scale: 1,
-    transition: {
-      duration: 0.4,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    transition: { duration: 0.6, ease: easeSmooth },
   },
 }
 
@@ -65,144 +42,86 @@ export const staggerContainer: Variants = {
   initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0.12,
     },
   },
 }
 
 export const staggerItem: Variants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
+  initial: { opacity: 0, y: 24 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    transition: { duration: 0.7, ease: easeSmooth },
   },
 }
 
-// Hero section specific animations
 export const heroTitle: Variants = {
-  initial: {
-    opacity: 0,
-    y: 30,
-  },
+  initial: { opacity: 0, y: 32 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    transition: { duration: 0.9, ease: easeSmooth },
   },
 }
 
 export const heroSubtitle: Variants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
+  initial: { opacity: 0, y: 24 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
-      delay: 0.2,
-    },
+    transition: { duration: 0.75, ease: easeSmooth, delay: 0.15 },
   },
 }
 
 export const heroDescription: Variants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
+  initial: { opacity: 0, y: 24 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
-      delay: 0.4,
-    },
+    transition: { duration: 0.75, ease: easeSmooth, delay: 0.28 },
   },
 }
 
 export const heroButtons: Variants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
+  initial: { opacity: 0, y: 20 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
-      delay: 0.6,
-    },
+    transition: { duration: 0.7, ease: easeSmooth, delay: 0.4 },
   },
 }
 
-// Card hover animations
 export const cardHover: Variants = {
-  initial: {
-    y: 0,
-    scale: 1,
-  },
+  initial: { y: 0 },
   hover: {
-    y: -8,
-    scale: 1.02,
-    transition: {
-      duration: 0.3,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    y: -6,
+    transition: { duration: 0.35, ease: easeSmooth },
   },
 }
 
-// Button animations
 export const buttonHover: Variants = {
-  initial: {
-    scale: 1,
-  },
+  initial: { scale: 1 },
   hover: {
-    scale: 1.05,
-    transition: {
-      duration: 0.2,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    scale: 1.03,
+    transition: { duration: 0.25, ease: easeSmooth },
   },
   tap: {
-    scale: 0.95,
-    transition: {
-      duration: 0.1,
-    },
+    scale: 0.97,
+    transition: { duration: 0.12 },
   },
 }
 
-// Parallax background animation
 export const parallaxBg: Variants = {
-  initial: {
-    scale: 1.1,
-    opacity: 0.3,
-  },
+  initial: { scale: 1.06, opacity: 0.25 },
   animate: {
     scale: 1,
-    opacity: 0.1,
-    transition: {
-      duration: 1.2,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    opacity: 0.12,
+    transition: { duration: 1.4, ease: easeSmooth },
   },
 }
 
-// Logo marquee animation
 export const marquee: Variants = {
   animate: {
     x: [0, -100],
@@ -210,66 +129,59 @@ export const marquee: Variants = {
       x: {
         repeat: Infinity,
         repeatType: 'loop',
-        duration: 20,
+        duration: 28,
         ease: 'linear',
       },
     },
   },
 }
 
-// Section reveal animation
 export const sectionReveal: Variants = {
-  initial: {
-    opacity: 0,
-    y: 50,
-  },
+  initial: { opacity: 0, y: 40 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    transition: { duration: 0.85, ease: easeSmooth },
   },
 }
 
-// Navigation animations
 export const navItem: Variants = {
-  initial: {
-    opacity: 0,
-    y: -10,
-  },
+  initial: { opacity: 0, y: -8 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.3,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    transition: { duration: 0.35, ease: easeSmooth },
   },
 }
 
-// Mobile menu animations
 export const mobileMenu: Variants = {
-  initial: {
-    opacity: 0,
-    x: '100%',
-  },
+  initial: { opacity: 0, y: -10 },
   animate: {
     opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.3,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    y: 0,
+    transition: { duration: 0.35, ease: easeSmooth },
   },
   exit: {
     opacity: 0,
-    x: '100%',
-    transition: {
-      duration: 0.3,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
+    y: -8,
+    transition: { duration: 0.25, ease: easeSmooth },
   },
 }
 
+export const revealImage: Variants = {
+  initial: { opacity: 0, scale: 1.04 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1, ease: easeSmooth },
+  },
+}
+
+export const listRow: Variants = {
+  initial: { opacity: 0, y: 18 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: easeSmooth },
+  },
+}

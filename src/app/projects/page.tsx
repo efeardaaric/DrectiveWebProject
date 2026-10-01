@@ -1,250 +1,176 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import Section from '@/components/Section'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 import ProjectCard from '@/components/ProjectCard'
 import CTA from '@/components/CTA'
-import { staggerContainer, staggerItem } from '@/lib/motion'
+import { easeSmooth } from '@/lib/motion'
+import { mahalleninMakasi, games, apps, webPortfolio } from '@/lib/portfolio'
 
-const allProjects = [
+type ProjectItem = {
+  title: string
+  description: string
+  image?: string
+  images?: string[]
+  video?: string
+  tags: string[]
+  category: 'web' | 'game' | 'app'
+  url?: string
+}
+
+const projects: ProjectItem[] = [
+  ...games.map((g) => ({ ...g })),
   {
     title: 'Crusader Tycoon',
-    description: 'Orta Çağ temalı bir strateji ve yönetim oyunu. Oyuncular, küçük bir orduyla başlayıp kalelerini güçlendirir, birliklerini yönetir ve farklı savaş senaryolarında düşmanlara karşı mücadele eder. Kuşatma, meydan muharebesi ve kale savunması gibi dinamik savaşlarla dolu Crusader Tycoon, tarihsel birliklerle gerçekçi bir strateji deneyimi sunarken, düşman tarafında fantastik sürprizler de barındırır.',
+    description: 'Orta Çağ’da kaleni büyütüp ordunu yönettiğin piksel sanat bir strateji ve idle oyunu.',
     video: '/images/Crusader Tycoon Trailer.mp4',
-    tags: ['Historical', '2D', 'Idle', 'Pixel Art'],
+    tags: ['Strateji', 'Pixel Art'],
     category: 'game',
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    title: 'Scanny',
-    description: 'Scanny, ders notlarını tarayıp özetleyen ve bu özetlerden kişisel quizler oluşturan yapay zekâ destekli bir mobil uygulamadır. Öğrencilerin öğrenme sürecini hızlandırır, bilgiyi pekiştirir ve sınavlara daha verimli hazırlanmalarını sağlar.',
-    images: ['/images/Scanny1.jpg', '/images/Scanny2.jpg', '/images/Scanny3.jpg'],
-    tags: ['Swift', 'React', 'OCR', 'AI-Powered'],
-    category: 'mobile',
-    liveUrl: '#',
-    githubUrl: '#',
   },
   {
     title: 'Ferman',
-    description: 'Ferman, Osmanlı esintili kart kaydırma tabanlı bir mobil oyun. Oyuncular, karşılarına çıkan olay kartlarını sağa ya da sola kaydırarak kararlar verir ve kendi hükümdarlıklarının kaderini şekillendirir. Her seçim, halkın refahını, ordunun gücünü ve devletin dengesini etkiler. Basit ama derin karar mekanikleriyle Ferman, her hamlede “tahtı korumak mı yoksa yıkıma sürüklenmek mi?” sorusunu sorduran sürükleyici bir deneyim sunar.',
-    video: '/images/Ferman_Teaser.MP4',
-    tags: ['Authentic','Card Game', 'Powerful Narrative'],
+    description: 'Osmanlı esintili, kartları kaydırarak hükümdarlığını yönettiğin mobil karar oyunu.',
+    video: '/images/Ferman_Teaser.mp4',
+    tags: ['Mobil', 'Kart'],
     category: 'game',
-    liveUrl: '#',
-    githubUrl: '#',
   },
-  {
-    title: 'Wizardus',
-    description: 'Wizardus, büyü ve stratejiyi bir araya getiren retro tarzda bir piksel sanat oyunu. Oyuncular, gizemli diyarları keşfederken farklı büyüler öğrenir, yaratıklarla savaşır ve kendi sihirli yolculuklarını şekillendirir. Basit ama bağımlılık yapan oynanışıyla Wizardus, hem nostaljik hem de yenilikçi bir deneyim sunar.',
-    images: ['/images/wizardus1.jpg', '/images/wizardus2.jpg', '/images/wizardus3.jpg'],
-    tags: ['VS Like', 'Hardcore Gameplay', 'Diverse Enemies', ],
-    category: 'game',
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    title: 'StuFinance',
-    description: 'StuFinance, öğrencilerin gelir ve giderlerini kolayca takip ederek bütçelerini yönetmelerini sağlayan pratik bir finans uygulamasıdır. Harcamalarınızı kategorilere ayırın, gelirlerinizi kaydedin ve grafiklerle bütçe dengenizi anlık olarak görün.',
-    image: '/images/Stu.png',
-    tags: ['React Native', 'Firebase', 'Payment',],
-    category: 'mobile',
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-  
-  // Diğer projeler buraya eklenebilir
-  {
-    title: 'Vellichor Games',
-    image: '/images/veli.png',
-    category: 'web',
-    tags: ['TypeScript', 'Tailwind CSS', 'Next.js'],
-  },
-  {
-    title: 'Adell',
-    image: '/images/adell.png',
-    category: 'web',
-    tags: ['TypeScript', 'Tailwind CSS', 'Next.js'],
-  },
-];
+  { ...apps[0], image: undefined, images: ['/images/Scanny1.jpg', '/images/Scanny2.jpg', '/images/Scanny3.jpg'] },
+  { ...apps[1] },
+  ...webPortfolio.map((w) => ({ ...w })),
+]
+
 const categories = [
   { id: 'all', name: 'Tümü' },
-  { id: 'web', name: 'Web Geliştirme' },
-  { id: 'game', name: 'Oyun Geliştirme' },
-  { id: 'mobile', name: 'Mobil Uygulama' },
-];
+  { id: 'game', name: 'Oyunlar' },
+  { id: 'app', name: 'Uygulamalar' },
+  { id: 'web', name: 'Web' },
+] as const
 
 export default function ProjectsPage() {
-  const [activeCategory, setActiveCategory] = useState('all')
-
-  const filteredProjects = activeCategory === 'all' 
-    ? allProjects 
-    : allProjects.filter(project => project.category === activeCategory)
+  const [active, setActive] = useState<(typeof categories)[number]['id']>('all')
+  const filtered = active === 'all' ? projects : projects.filter((p) => p.category === active)
 
   return (
-    <div className="relative">
-      {/* Hero Section */}
-      <Section className="pt-8 lg:pt-16">
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
-          className="text-center max-w-4xl mx-auto"
+    <div>
+      <section className="container-custom section-padding pb-10 pt-12 lg:pt-20">
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: easeSmooth }}
+          className="font-heading text-5xl font-extrabold tracking-tight sm:text-6xl"
         >
-          <motion.h1
-            variants={staggerItem}
-            className="font-heading font-bold text-4xl lg:text-5xl xl:text-6xl text-foreground mb-6"
-          >
-            Projelerimiz
-          </motion.h1>
-          <motion.p
-            variants={staggerItem}
-            className="text-foreground/70 text-lg lg:text-xl leading-relaxed mb-8"
-          >
-            Son dönemde tamamladığımız projelerden bir seçki. Her biri farklı 
-            teknolojiler ve yaklaşımlarla geliştirildi. Web geliştirmeden oyun 
-            geliştirmeye kadar geniş bir yelpazede çalışıyoruz.
-          </motion.p>
-        </motion.div>
-      </Section>
+          Projeler
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: easeSmooth }}
+          className="mt-4 max-w-2xl text-lg text-muted"
+        >
+          Kendi oyunlarımız ve uygulamalarımız, bir de markalar için geliştirdiğimiz web siteleri.
+        </motion.p>
+      </section>
 
-      {/* Filter Section */}
-      <Section className="bg-accent-900/20">
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
+      {/* Featured: Mahallenin Makası */}
+      <section className="container-custom section-padding pb-12">
+        <Link
+          href="/#mahallenin-makasi"
+          className="group grid items-center gap-6 overflow-hidden rounded-3xl border border-line bg-[#14110d] p-6 sm:grid-cols-[auto_1fr] sm:p-8 lg:grid-cols-[auto_1fr_auto]"
         >
-          <motion.div variants={staggerItem} className="text-center mb-12">
-            <h2 className="font-heading font-semibold text-2xl lg:text-3xl text-foreground mb-6">
-              Kategoriye Göre Filtrele
-            </h2>
-            <div className="flex flex-wrap justify-center gap-4">
-              {categories.map((category) => (
-                <motion.button
-                  key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  style={{ background: activeCategory === category.id ? '#cc972b' : 'rgba(204,151,43,0.20)', color: activeCategory === category.id ? '#18181b' : '#cc972b', fontWeight: 500 }}
-                  className="px-6 py-3 rounded-lg font-medium border-none"
-                >
-                  {category.name}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      </Section>
+          <div className="relative h-28 w-28 overflow-hidden rounded-[1.5rem] shadow-lg">
+            <Image src={mahalleninMakasi.icon} alt="Mahallenin Makası ikonu" fill className="object-cover" sizes="112px" />
+          </div>
+          <div>
+            <p className="m-0 text-sm text-brass">Yeni oyunumuz · {mahalleninMakasi.platforms.join(' & ')}</p>
+            <h2 className="mt-1 font-heading text-3xl font-bold">{mahalleninMakasi.title}</h2>
+            <p className="mt-2 max-w-xl text-muted">{mahalleninMakasi.tagline}. Tıraş yap, sohbet et, dükkânını büyüt.</p>
+          </div>
+          <div className="hidden gap-3 lg:flex">
+            {mahalleninMakasi.screens.slice(1, 3).map((s) => (
+              <div key={s.src} className="relative aspect-[473/1024] w-24 overflow-hidden rounded-xl border-2 border-[#1c1915] transition duration-500 group-hover:-translate-y-1">
+                <Image src={s.src} alt={s.alt} fill className="object-cover" sizes="96px" />
+              </div>
+            ))}
+          </div>
+        </Link>
+      </section>
 
-      {/* Projects Grid */}
-      <Section>
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-          >
-            {filteredProjects.map((project, index) => (
+      <section className="container-custom section-padding pb-20">
+        <div className="mb-10 flex flex-wrap gap-2">
+          {categories.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => setActive(c.id)}
+              className={`rounded-full px-5 py-2.5 text-sm font-medium transition ${
+                active === c.id
+                  ? 'bg-brass text-background'
+                  : 'border border-line text-muted hover:border-brass hover:text-foreground'
+              }`}
+            >
+              {c.name}
+            </button>
+          ))}
+        </div>
+
+        <motion.div layout className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((p) => (
               <motion.div
-                key={project.title}
+                key={p.title}
                 layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.45, ease: easeSmooth }}
               >
-                <ProjectCard
-                  title={project.title}
-                  description={project.description ?? ''}
-                  image={project.image}
-                  images={project.images}
-                  video={project.video}
-                  tags={project.tags}
-                  liveUrl={project.liveUrl}
-                  githubUrl={project.githubUrl}
-                />
+                {p.url && !p.video && !p.images ? (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block h-full overflow-hidden rounded-2xl border border-line bg-surface transition hover:border-brass/50"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <Image
+                        src={p.image!}
+                        alt={p.title}
+                        fill
+                        className="object-cover object-top transition duration-700 ease-out group-hover:scale-[1.04]"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </div>
+                    <div className="p-5">
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="m-0 font-heading text-xl font-semibold">{p.title}</h3>
+                        <ArrowUpRight className="h-4 w-4 text-brass" />
+                      </div>
+                      <p className="mt-2 text-sm text-muted">{p.description}</p>
+                    </div>
+                  </a>
+                ) : (
+                  <ProjectCard
+                    title={p.title}
+                    description={p.description}
+                    image={p.image}
+                    images={p.images}
+                    video={p.video}
+                    tags={p.tags}
+                  />
+                )}
               </motion.div>
             ))}
-          </motion.div>
-          
-          {filteredProjects.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-16"
-            >
-              <p className="text-foreground/50 text-lg">
-                Bu kategoride henüz proje bulunmuyor.
-              </p>
-            </motion.div>
-          )}
+          </AnimatePresence>
         </motion.div>
-      </Section>
+      </section>
 
-      {/* Stats Section */}
-      <Section className="bg-accent-900/20">
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          <motion.div variants={staggerItem} className="text-center mb-16">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Proje İstatistikleri
-            </h2>
-            <p className="text-foreground/70 text-lg max-w-3xl mx-auto">
-              Bugüne kadar tamamladığımız projelerin sayısal verileri
-            </p>
-          </motion.div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: '5+', label: 'Tamamlanan Proje' },
-              { number: '10+', label: 'Web Uygulaması' },
-              { number: '3+', label: 'Oyun Projesi' },
-              { number: '2+', label: 'Mobil Uygulama' },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                variants={staggerItem}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <div className="font-heading font-bold text-3xl lg:text-4xl gradient-text mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-foreground/60 text-sm lg:text-base">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </Section>
-
-      {/* CTA Section */}
       <CTA
-        title="Sizin Projenizi de Yapalım"
-        description="Benzer projeler geliştirmek veya tamamen yeni bir fikrinizi hayata geçirmek için bizimle iletişime geçin."
-        primaryButton={{
-          text: 'Proje Başlat',
-          href: '/contact',
-        }}
-        secondaryButton={{
-          text: 'Hizmetlerimizi İncele',
-          href: '/services',
-        }}
+        title="Sıradaki proje sizinki olabilir"
+        description="Oyun, mobil uygulama ya da web sitesi. Fikrinizi anlatın, birlikte planlayalım."
+        primaryButton={{ text: 'Bizimle çalışın', href: '/contact#bizimle-calisin' }}
+        secondaryButton={{ text: 'Hizmetler', href: '/services' }}
       />
     </div>
   )

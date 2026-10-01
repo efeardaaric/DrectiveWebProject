@@ -1,0 +1,30 @@
+export const site = {
+  name: 'Drective',
+  legalName: 'D-RECTIVE Yazılım ve Danışmanlık Ltd. Şti.',
+  url: 'https://drective.com',
+  email: 'drectivegames@gmail.com',
+  phone: '+90 535 964 45',
+  address: 'Halkalı Merkez Mah. Halkalı Cad. No:281/23 Ofis No:34, Küçükçekmece/İstanbul',
+  title: 'Drective — Oyun ve Mobil Uygulama Stüdyosu',
+  description:
+    'Drective, İstanbul merkezli bir oyun ve mobil uygulama stüdyosu. Mahallenin Makası ve Connections gibi oyunlar, mobil uygulamalar ve markalar için web siteleri geliştiriyoruz.',
+  keywords: [
+    'Drective',
+    'oyun stüdyosu',
+    'mobil oyun',
+    'oyun geliştirme',
+    'mobil uygulama geliştirme',
+    'Unity',
+    'indie oyun',
+    'Mahallenin Makası',
+    'Connections Steam',
+    'web sitesi geliştirme',
+    'İstanbul yazılım şirketi',
+  ],
+  social: {
+    instagram: 'https://www.instagram.com/drectiveinteractive/',
+    linkedin: 'https://www.linkedin.com/company/d-rective-interactive/',
+    github: 'https://github.com/efeardaaric',
+    steam: 'https://store.steampowered.com/app/4824950/Connections/',
+  },
+}

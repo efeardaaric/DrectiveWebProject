@@ -18,15 +18,14 @@ export async function POST(request: Request) {
 
     if (!email || !pass) {
       console.error('Error: Email credentials not configured');
-      console.log('EMAIL:', email ? 'Set' : 'Not set');
-      console.log('EMAIL_PASS:', pass ? 'Set' : 'Not set');
-      
+      // Client mailto fallback kullanabilsin diye kontrollü hata
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Sunucu yapılandırması eksik. Lütfen yönetici ile iletişime geçin.'
+        {
+          success: false,
+          error: 'email_not_configured',
+          fallback: true,
         },
-        { status: 500 }
+        { status: 503 }
       );
     }
 

@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Kullanım Şartları | D-RECTIVE',
-  description: 'D-RECTIVE web sitesi kullanım şartları ve yasal uyarılar hakkında detaylı bilgi.',
+  title: 'Kullanım Şartları | Drective',
+  description: 'Drective web sitesi kullanım şartları.',
 };
 
 export default function TermsOfUsePage() {
@@ -18,24 +18,24 @@ export default function TermsOfUsePage() {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-white mb-4 font-heading">1. Giriş</h2>
             <p className="mb-6 text-gray-300 leading-relaxed">
-              D-RECTIVE web sitesine (&quot;Site&quot;) hoş geldiniz. Bu Kullanım Şartları (&quot;Şartlar&quot;), Site&apos;yi ziyaret etmeniz ve kullanmanız 
-              ile ilgili olarak sizinle D-RECTIVE arasındaki hukuki ilişkiyi düzenler. Lütfen Site&apos;yi kullanmadan önce bu Şartları dikkatle okuyunuz.
+              Drective web sitesine (&quot;Site&quot;) hoş geldiniz. Bu Kullanım Şartları (&quot;Şartlar&quot;), Site&apos;yi ziyaret etmeniz ve kullanmanız 
+              ile ilgili olarak sizinle Drective arasındaki hukuki ilişkiyi düzenler. Lütfen Site&apos;yi kullanmadan önce bu Şartları dikkatle okuyunuz.
             </p>
           </section>
 
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-white mb-4 font-heading">2. Sorumluluk Reddi</h2>
             <p className="mb-6 text-gray-300 leading-relaxed">
-              Site&apos;de yer alan tüm içerikler &quot;olduğu gibi&quot; sunulmaktadır. D-RECTIVE, içeriklerin doğruluğu, güncelliği veya 
+              Site&apos;de yer alan tüm içerikler &quot;olduğu gibi&quot; sunulmaktadır. Drective, içeriklerin doğruluğu, güncelliği veya 
               eksiksizliği konusunda herhangi bir garanti vermemektedir. Sitenin kullanımından doğabilecek her türlü zarardan 
-              D-RECTIVE sorumlu tutulamaz.
+              Drective sorumlu tutulamaz.
             </p>
           </section>
 
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-white mb-4 font-heading">3. Fikri Mülkiyet Hakları</h2>
             <p className="mb-6 text-gray-300 leading-relaxed">
-              Site&apos;de yer alan tüm içerikler (metinler, görseller, logolar, tasarımlar, yazılımlar vb.) D-RECTIVE veya lisans 
+              Site&apos;de yer alan tüm içerikler (metinler, görseller, logolar, tasarımlar, yazılımlar vb.) Drective veya lisans 
               verenlerine aittir ve Türk Fikri ve Sınaî Haklar Kanunu ve ilgili mevzuat kapsamında korunmaktadır. İzinsiz kopyalama, 
               çoğaltma, dağıtma veya başka bir şekilde kullanımı yasaktır.
             </p>
@@ -68,7 +68,7 @@ export default function TermsOfUsePage() {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-white mb-4 font-heading">6. Hizmetlerin Değiştirilmesi veya Sona Erdirilmesi</h2>
             <p className="mb-6 text-gray-300 leading-relaxed">
-              D-RECTIVE, herhangi bir zamanda önceden bildirimde bulunmaksızın Site&apos;de değişiklik yapma, içerik ekleme veya 
+              Drective, herhangi bir zamanda önceden bildirimde bulunmaksızın Site&apos;de değişiklik yapma, içerik ekleme veya 
               çıkarma, hizmetleri değiştirme veya sonlandırma hakkını saklı tutar.
             </p>
           </section>
@@ -76,7 +76,7 @@ export default function TermsOfUsePage() {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-white mb-4 font-heading">7. Sınırlı Sorumluluk</h2>
             <p className="mb-6 text-gray-300 leading-relaxed">
-              D-RECTIVE, Site&apos;nin kesintisiz, güvenli veya hatasız olacağına dair herhangi bir garanti vermemektedir. 
+              Drective, Site&apos;nin kesintisiz, güvenli veya hatasız olacağına dair herhangi bir garanti vermemektedir. 
               Sitenin kullanımından doğan doğrudan veya dolaylı zararlardan sorumlu tutulamaz.
             </p>
           </section>
@@ -85,7 +85,7 @@ export default function TermsOfUsePage() {
             <h2 className="text-2xl font-semibold text-white mb-4 font-heading">8. Tazminat</h2>
             <p className="mb-6 text-gray-300 leading-relaxed">
               Bu Şartların ihlalinden veya Site&apos;nin kötüye kullanılmasından kaynaklanan her türlü talep, zarar, yükümlülük, 
-              gider ve masraflar (avukatlık ücretleri dahil) için D-RECTIVE&apos;i tazmin etmeyi kabul edersiniz.
+              gider ve masraflar (avukatlık ücretleri dahil) için Drective&apos;i tazmin etmeyi kabul edersiniz.
             </p>
           </section>
 
@@ -100,7 +100,7 @@ export default function TermsOfUsePage() {
           <section>
             <h2 className="text-2xl font-semibold text-white mb-4 font-heading">10. Değişiklikler</h2>
             <p className="mb-6 text-gray-300 leading-relaxed">
-              D-RECTIVE, dilediği zaman bu Şartlarda değişiklik yapma hakkını saklı tutar. Değişiklikler, Sitede yayınlandığı 
+              Drective, dilediği zaman bu Şartlarda değişiklik yapma hakkını saklı tutar. Değişiklikler, Sitede yayınlandığı 
               andan itibaren geçerli olacaktır. Değişikliklerden sonra Site&apos;yi kullanmaya devam etmeniz, değişiklikleri kabul 
               ettiğiniz anlamına gelir.
             </p>

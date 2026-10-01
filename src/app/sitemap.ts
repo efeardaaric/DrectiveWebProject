@@ -1,38 +1,22 @@
 import { MetadataRoute } from 'next'
+import { site } from '@/lib/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://drective.com'
-  
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/projects`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+  const lastModified = new Date()
+  const routes: { path: string; priority: number; changeFrequency: 'weekly' | 'monthly' | 'yearly' }[] = [
+    { path: '', priority: 1, changeFrequency: 'weekly' },
+    { path: '/projects', priority: 0.9, changeFrequency: 'weekly' },
+    { path: '/services', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
+    { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },
+    { path: '/privacy-policy', priority: 0.2, changeFrequency: 'yearly' },
+    { path: '/terms-of-use', priority: 0.2, changeFrequency: 'yearly' },
   ]
+
+  return routes.map((r) => ({
+    url: `${site.url}${r.path}`,
+    lastModified,
+    changeFrequency: r.changeFrequency,
+    priority: r.priority,
+  }))
 }

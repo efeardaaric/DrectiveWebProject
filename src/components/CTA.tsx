@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+
+import { motion } from "framer-motion";
+import { easeSmooth } from "@/lib/motion";
 
 interface ButtonProps {
   text: string;
@@ -14,31 +16,33 @@ interface CTAProps {
   className?: string;
 }
 
-export default function CTA({ 
-  title, 
-  description, 
-  primaryButton, 
+export default function CTA({
+  title,
+  description,
+  primaryButton,
   secondaryButton,
-  className = ''
+  className = "",
 }: CTAProps) {
   return (
-    <section className={`rounded-2xl p-8 border text-center grid gap-3 max-w-4xl mx-auto my-12 ${className}`}>
-      <h2 className="text-3xl font-bold">{title}</h2>
-      <p className="text-foreground/60 mb-4">{description}</p>
-      <div className="flex gap-4 justify-center">
-        <a
-          href={primaryButton.href}
-          className="px-6 py-3 rounded-xl bg-yellow-400 text-foreground font-medium hover:bg-yellow-500 transition-colors duration-300"
-        >
-          {primaryButton.text}
-        </a>
-        <a
-          href={secondaryButton.href}
-          className="px-6 py-3 rounded-xl border border-foreground/20 font-medium hover:bg-foreground/5 transition-colors duration-300"
-        >
-          {secondaryButton.text}
-        </a>
-      </div>
+    <section className={`container-custom section-padding my-16 ${className}`}>
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: easeSmooth }}
+        className="surface-panel px-8 py-12 text-center sm:px-12"
+      >
+        <h2 className="font-heading text-3xl font-bold text-foreground">{title}</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-muted">{description}</p>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href={primaryButton.href} className="btn-primary">
+            {primaryButton.text}
+          </a>
+          <a href={secondaryButton.href} className="btn-secondary">
+            {secondaryButton.text}
+          </a>
+        </div>
+      </motion.div>
     </section>
   );
 }

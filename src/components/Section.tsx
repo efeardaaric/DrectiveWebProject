@@ -17,7 +17,7 @@ export default function Section({ children, className = '', id }: SectionProps) 
       variants={sectionReveal}
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: '-80px' }}
       className={`section-padding py-16 lg:py-24 ${className}`}
     >
       <div className="container-custom">
